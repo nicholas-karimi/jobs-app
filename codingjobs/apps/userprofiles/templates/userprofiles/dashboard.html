@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+    <h2 class="title">Dashboard</h2>
+
+    {% if userprofile.is_employer %}
+        <h2 class="subtitle">Jobs</h2>
+        
+        {% for job in request.user.jobs.all %}
+            <div class="job">
+                {{ job.title }}
+            </div>
+        {% empty %}
+         <p>You don't have any jobs yet ..</p>
+        {% endfor %}
+    
+    {% else %}
+        <h2>Applciations</h2>
+        {% for application in request.user.applications.all %}
+            <div class="applications">
+                <a href="{% url 'view_application' application.id %}">{{ application.job.title }}</a>
+            </div>
+        {% empty %}
+            <p>You have not applied to any jobs yet..</p>
+        {% endfor %}
+            
+    {% endif %}
+        
+{% endblock content %}
+    
