@@ -10,11 +10,11 @@ def dashboard(request):
 
 
 @login_required
-def view_application(request, app_id):
+def view_application(request, application_id):
     if request.user.userprofile.is_employer:
-        application = get_object_or_404(Application, pk=app_id, job__created_by=request.user)
+        application = get_object_or_404(Application, pk=application_id, job__created_by=request.user)
     else:
-        application = get_object_or_404(Application, pk=app_id, created_by=request.user)
+        application = get_object_or_404(Application, pk=application_id, created_by=request.user)
 
     # messages
     if request.method == 'POST':
@@ -23,7 +23,7 @@ def view_application(request, app_id):
         if content:
             conversationmessage = ConversationMessage.objects.create(application=application, content=content, created_by=request.user)
             
-            return redirect('view_application', app_id=app_id)
+            return redirect('view_application', application_id=application_id)
 
     return render(request, 'userprofiles/view_application.html', {'application': application})
 

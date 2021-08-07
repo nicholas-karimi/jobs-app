@@ -22,7 +22,7 @@
                         {% if request.user.is_authenticated %}
                             <a href="{% url 'new_job' %}" class="button is-success">New Job</a>
                             <a href="{% url 'dashboard' %}" class="button is-light"><strong>Dashboard</strong></a>
-                            <a href="#" class="button is-light"><strong>Notifications</strong></a>
+                            <a href="{% url 'notifications' %}" class="button is-light"><strong>Notifications ({{ notifications.count }})</strong></a>
                             <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
                         {% else %}
                             <a href="{% url 'signup' %}" class="button is-success"><strong>Signup</strong></a>
