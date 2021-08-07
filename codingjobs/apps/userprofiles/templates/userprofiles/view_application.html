@@ -10,5 +10,33 @@
     <p><strong>Content: </strong> <br>{{ application.content }}</p>
     <p><strong>Experience: </strong> <br> {{ application.experience }}</p>
 
+    <hr>
+    <h2 class="subtitle">Conversation</h2>
+    
+    {% for message in application.conversationmessages.all %}
+        <div class="notification">
+            <b>{{ message.created_by.username }} - {{ message.created_at|timesince}} ago</b>
+
+            {{ message.content }}
+        </div>
+    {% empty %}
+        <p>No messages yet..</p>
+    {% endfor %}
+    <hr>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="field">
+            <div class="control">
+                <textarea name="content" id="id_content"class="textarea" placeholder="Your Message"></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-success">Send</button>
+            </div>
+        </div>
+    </form>
 {% endblock content %}
     

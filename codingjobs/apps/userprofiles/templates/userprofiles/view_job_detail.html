@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+    <h2 class="title">View Job - {{ job.title }}</h2>
+    
+    {% for application in job.applications.all  %}
+        <a href="{% url 'view_application' application.id %}">{{ application.created_by.username }}</a>
+    {% endfor %}
+        
+{% endblock content %}
+    
