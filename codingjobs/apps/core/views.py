@@ -6,7 +6,7 @@ from apps.jobs.models import Job
 from apps.userprofiles.models import UserProfile
 
 def home(request):
-    jobs = Job.objects.all()[0:3]
+    jobs = Job.objects.all()[:5]
 
     return render(request, 'core/index.html', {'jobs':jobs})
 
