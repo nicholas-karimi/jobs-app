@@ -30,4 +30,5 @@ urlpatterns = [
 
     path('dashboard/', include('apps.userprofiles.urls')),
     path('jobs/', include('apps.jobs.urls')),
+    path('notifications/', include('apps.notification.urls')),
 ]

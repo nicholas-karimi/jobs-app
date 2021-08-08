@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from .models import Job 
 from .forms import AddJobForm, ApplicationForm
 
+from apps.notification.utilities import create_notification
+
 def job_details(request, job_id):
     job = Job.objects.get(pk=job_id)
 
@@ -37,10 +39,12 @@ def apply_for_job(request, job_id):
         form = ApplicationForm(request.POST)
 
         if form.is_valid():
-            new_app = form.save(commit=False)
-            new_app.job = job
-            new_app.created_by = request.user 
-            new_app.save()
+            application = form.save(commit=False)
+            application.job = job
+            application.created_by = request.user 
+            application.save()
+
+            create_notification(request, job.created_by, 'application', extra_id=application.id)
 
             return redirect('dashboard')
 
